@@ -21,6 +21,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: GameAPi
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ AZUREAPPSERVICE_PUBLISHPROFILE_8C7B2F42E8DA49FDAE194019077DBC57 }}
           package: .       
 
