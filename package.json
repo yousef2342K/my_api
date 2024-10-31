@@ -1,16 +1,20 @@
 {
-  "dependencies": {
-    "express": "^4.21.1"
-  },
   "name": "my_api",
   "version": "1.0.0",
   "main": "VIP.js",
-  "devDependencies": {},
   "scripts": {
+    "start": "node VIP.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "engines": {
+    "node": "14.x" // Adjust as needed
+  }
 }
