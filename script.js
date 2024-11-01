@@ -3,7 +3,7 @@ const fs = require('fs');
 const { spawn } = require('child_process');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Use environment variable PORT
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -13,17 +13,18 @@ app.get('/', (req, res) => {
     res.send('Welcome to the API! Use /data to read JSON and /execute to run your script.');
 });
 
+// Endpoint to read JSON data
 app.get('/data', (req, res) => {
     fs.readFile('leijao.json', 'utf8', (err, data) => {
         if (err) {
-            console.error('Error reading file:', err); // Log the entire error object
-            return res.status(500).send('Error reading file');
+            console.error('Error reading file:', err);
+            return res.status(500).send('Internal Server Error: Could not read file.');
         }
         try {
             res.send(JSON.parse(data));
         } catch (jsonErr) {
-            console.error('Error parsing JSON:', jsonErr); // Log JSON parsing errors
-            return res.status(500).send('Error parsing JSON');
+            console.error('Error parsing JSON:', jsonErr);
+            return res.status(500).send('Internal Server Error: Invalid JSON format.');
         }
     });
 });
@@ -32,7 +33,10 @@ app.get('/data', (req, res) => {
 app.post('/execute', (req, res) => {
     const args = req.body.args || []; // Expecting an array of arguments
 
-    // Spawn a child process to run the existing JavaScript code
+    if (!Array.isArray(args)) {
+        return res.status(400).send({ error: 'Invalid input: args must be an array' });
+    }
+
     const child = spawn('node', ['VIP.js', ...args]);
 
     let output = '';
