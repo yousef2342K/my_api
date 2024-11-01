@@ -11,16 +11,20 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v3
-      - name: Setup Node.js version
+        
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with: 
-          node-version: '12.22.x'
+          node-version: '18.x'  
       - name: Install Dependencies
         run: npm install
+        
+      - name: Build Project
+        run: npm run build 
+
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
           app-name: GameAPi
-          publish-profile: ${{ AZUREAPPSERVICE_PUBLISHPROFILE_8C7B2F42E8DA49FDAE194019077DBC57 }}
-          package: .       
-
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          package: .  
