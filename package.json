@@ -9,10 +9,11 @@
   "dependencies": {
     "express": "^4.21.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^27.0.0"  
+  },
   "keywords": [],
-  "author": "",
+  "author": "Youssif Khalid",  
   "license": "ISC",
-  "description": ""
+  "description": "A simple Game Express API"
 }
-
