@@ -39,7 +39,18 @@ app.get('/api/Users/leijao', (req, res) => {
 });
 
 app.get('/api/Users/fk4j', (req, res) => {
-    res.send('15694');
+    fs.readFile('fk4j.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send('Internal Server Error: Could not read file.');
+        }
+        try {
+            res.send(JSON.parse(data));
+        } catch (jsonErr) {
+            console.error('Error parsing JSON:', jsonErr);
+            return res.status(500).send('Internal Server Error: Invalid JSON format.');
+        }
+    });
 });
 
 // Start the server
