@@ -37,7 +37,7 @@ app.get('/api/Users/leijao', (req, res) => {
         }
     });
 });
-
+// Endpoint to read JSON data
 app.get('/api/Users/fk4j', (req, res) => {
     fs.readFile('fk4j.json', 'utf8', (err, data) => {
         if (err) {
